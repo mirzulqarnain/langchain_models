@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 llm = ChatOpenRouter(
-    model="openrouter/free"
+    model="openrouter/free", temperature = 1.5 
 )
 
-result = llm.invoke("Write a poem about a lonely computer.and also tell me whats the capital of Pakistan")
+result = llm.invoke("suggest me 5 Pakistani names")
 
 print(result.content) 
