@@ -1,24 +1,11 @@
-import os
-import requests
+from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
 
-response = requests.post(
-    "https://openrouter.ai/api/v1/embeddings",
-    headers={
-        "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",
-        "Content-Type": "application/json"
-    },
-    json={
-        "model": "liquid/lfm-2.5-embedding-350m:free",
-        "input": "What is the capital of Pakistan?"
-    }
-)
+model = ChatOpenAI(model='gpt-4', temperature=1.5)
 
-response.raise_for_status()
+result =model.invoke("Write a 5 line poem on cricket")
 
-result = response.json()["data"][0]["embedding"]
+print(result.content)
 
-print(result)
-print("Dimensions:", len(result))
